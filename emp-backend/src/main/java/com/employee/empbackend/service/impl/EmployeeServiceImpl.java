@@ -4,7 +4,6 @@ import com.employee.empbackend.EmpBackendApplication;
 import com.employee.empbackend.dto.EmployeeDto;
 import com.employee.empbackend.entity.Employee;
 import com.employee.empbackend.exception.ResourceNotFoundException;
-import com.employee.empbackend.mapper.EmployeeMapper;
 import com.employee.empbackend.repository.EmployeeRepository;
 import com.employee.empbackend.service.EmployeeService;
 import lombok.AllArgsConstructor;
@@ -27,21 +26,20 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public EmployeeDto getEmployeeById(Long employeeId) {
+    public Employee getEmployeeById(Long employeeId) {
        Employee employee = employeeRepository.findById(employeeId)
                 .orElseThrow(()->new ResourceNotFoundException("Employee does not exists with given id:"+employeeId));
-        return EmployeeMapper.mapToEmployeeData(employee);
+        return employee;
     }
 
     @Override
-    public List<EmployeeDto> getAllEmployees() {
+    public List<Employee> getAllEmployees() {
         List<Employee> employees = employeeRepository.findAll();
-        return employees.stream().map((employee)->EmployeeMapper.mapToEmployeeData(employee))
-                .collect(Collectors.toList());
+        return employees;
     }
 
     @Override
-    public EmployeeDto updateEmployee(Long employeeId, EmployeeDto updatedEmployee) {
+    public Employee updateEmployee(Long employeeId, Employee updatedEmployee) {
         Employee employee = employeeRepository.findById(employeeId).orElseThrow(
                 ()->new ResourceNotFoundException("Employee does not exists with given id:"+employeeId));
 
@@ -50,7 +48,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setEmailId(updatedEmployee.getEmailId());
 
         Employee updatedEmployeeObj = employeeRepository.save(employee);
-        return EmployeeMapper.mapToEmployeeData(updatedEmployeeObj);
+        return updatedEmployeeObj;
     }
 
     @Override

@@ -9,11 +9,11 @@ import java.util.List;
 public interface EmployeeService {
     Employee createEmployee(Employee employee);
 
-    EmployeeDto getEmployeeById(Long employeeId);
+    Employee getEmployeeById(Long employeeId);
 
-    List<EmployeeDto> getAllEmployees();
+    List<Employee> getAllEmployees();
 
-    EmployeeDto updateEmployee (Long employeeId, EmployeeDto updatedEmployee);
+    Employee updateEmployee (Long employeeId, Employee updatedEmployee);
 
     void deleteEmployee(Long employeeId);
 }

@@ -1,6 +1,5 @@
 package com.employee.empbackend.controller;
 
-import com.employee.empbackend.dto.EmployeeDto;
 import com.employee.empbackend.entity.Employee;
 import com.employee.empbackend.service.EmployeeService;
 import lombok.AllArgsConstructor;
@@ -23,22 +22,22 @@ public class EmployeeController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<EmployeeDto> getEmployeeId(@PathVariable("id") Long employeeId){
-        EmployeeDto employeeDto = employeeService.getEmployeeById(employeeId);
-        return ResponseEntity.ok(employeeDto);
+    public ResponseEntity<Employee> getEmployeeId(@PathVariable("id") Long employeeId){
+        Employee employee = employeeService.getEmployeeById(employeeId);
+        return ResponseEntity.ok(employee);
     }
 
     @GetMapping
-    public ResponseEntity<List<EmployeeDto>> getAllEmployees(){
-        List<EmployeeDto> employees = employeeService.getAllEmployees();
+    public ResponseEntity<List<Employee>> getAllEmployees(){
+        List<Employee> employees = employeeService.getAllEmployees();
         return ResponseEntity.ok(employees);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<EmployeeDto> updateEmployee(@PathVariable("id") Long employeeId,
-                                                      @RequestBody EmployeeDto updatedEmployee){
-        EmployeeDto employeeDto = employeeService.updateEmployee(employeeId,updatedEmployee);
-        return ResponseEntity.ok(employeeDto);
+    public ResponseEntity<Employee> updateEmployee(@PathVariable("id") Long employeeId,
+                                                      @RequestBody Employee updatedEmployee){
+        Employee employee = employeeService.updateEmployee(employeeId,updatedEmployee);
+        return ResponseEntity.ok(employee);
     }
 
     @DeleteMapping("{id}")
